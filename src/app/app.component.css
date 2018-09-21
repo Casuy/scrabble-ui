@@ -15,8 +15,8 @@ section.board {
   height: 24px;
   width: 24px;
   display: inline-block;
-  background-color: #faebd7;
-  border: 1px solid rgba(97, 36, 0, 0.55);
+  background-color: #fcfaf3;
+  border: 1px solid rgba(11, 16, 19, 0.68);
   border-top-width: 0;
   border-right-width: 0;
   text-align: center;
@@ -28,7 +28,7 @@ section.board {
 }
 
 .board-slot-focus {
-  background-color: #bcd9dd;
+  background-color: rgb(189, 192, 186);
 }
 
 /*section.available-tiles {*/
