@@ -1,19 +1,22 @@
 <section style="display: flex; flex-flow: row nowrap;">
   <section class="board">
-    <div class="board-row" *ngFor="let row of board">
+    <div class="board-row" *ngFor="let row of board; let y=index">
       <div class="board-slot"
-           *ngFor="let slot of row">
+           *ngFor="let slot of row; let x=index"
+           [class.board-slot-focus]="selectedSlot===slot"
+           (mousedown)="focus(x, y)">
+        {{slot.letter}}
       </div>
     </div>
   </section>
-  <section class="available-tiles">
-    <header>Available Tiles</header>
-    <div class="tiles">
-      <div class="tile" *ngFor="let l of availableLetters">{{l}}</div>
-    </div>
-    <section class="action-list">
-      <button class="action-button" (click)="pass()">Pass</button>
-    </section>
-  </section>
+  <!--<section class="available-tiles">-->
+  <!--<header>Available Tiles</header>-->
+  <!--<div class="tiles">-->
+  <!--<div class="tile" *ngFor="let l of availableLetters">{{l}}</div>-->
+  <!--</div>-->
+  <!--<section class="action-list">-->
+  <!--<button class="action-button" (click)="pass()">Pass</button>-->
+  <!--</section>-->
+  <!--</section>-->
 </section>
 
