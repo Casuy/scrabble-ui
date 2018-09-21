@@ -1,0 +1,57 @@
+section.board {
+  margin: 48px;
+}
+
+.board-row {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.board-slot {
+  height: 38px;
+  width: 38px;
+  display: inline-block;
+  background-color: antiquewhite;
+}
+
+section.available-tiles {
+  margin: 48px 48px 48px 0;
+}
+
+.available-tiles header {
+  font-size: 18px;
+  margin-bottom: 18px;
+}
+
+.tiles {
+  display: flex;
+  flex-flow: row wrap;
+  height: 400px;
+  width: 400px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.tile {
+  height: 38px;
+  width: 38px;
+  text-align: center;
+  line-height: 38px;
+  background-color: antiquewhite;
+}
+
+.action-list {
+  margin-top: 28px;
+}
+
+.action-button {
+  padding: 12px 19px;
+  font-size: 19px;
+  border: 1px solid palevioletred;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.action-button:hover {
+  background-color: antiquewhite;
+}
