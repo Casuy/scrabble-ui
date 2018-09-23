@@ -21,16 +21,19 @@
       <ng-template #inVoteStage>
         <div>Choose the correct words:</div>
         <div>
-          <span *ngIf="rs.game.vote.wordA; let w" (mousedown)="voteSelection.toggle(w)"
-                class="vote-block-word">{{w}}</span>
-          <ng-template *ngIf="rs.game.vote.wordB; let w">
+          <span *ngIf="rs.game.vote.wordA; let w"
+                (mousedown)="voteSelection.toggle(w)"
+                class="vote-block-word"
+                [class.vote-block-word-active]="voteSelection.isActive(w)">{{w}}</span>
+          <ng-container *ngIf="rs.game.vote.wordB; let w">
             <span>, </span>
             <span (mousedown)="voteSelection.toggle(w)"
-                  class="vote-block-word">{{w}}</span>
-          </ng-template>
+                  class="vote-block-word"
+                  [class.vote-block-word-active]="voteSelection.isActive(w)">{{w}}</span>
+          </ng-container>
         </div>
         <div style="display: flex; flex-flow: row nowrap; margin-top: 12px; margin-bottom: -8px">
-          <div style="cursor: pointer;" (click)="vote(selectedWords)">Submit</div>
+          <div style="cursor: pointer;" (click)="rs.vote(voteSelection.list)">Submit</div>
         </div>
       </ng-template>
       <ng-template #notInVoteStage>

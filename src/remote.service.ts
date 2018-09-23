@@ -83,6 +83,10 @@ export class RemoteService {
     }
     this.room = null;
   }
+
+  vote(selectedWords: string[]) {
+    alert(JSON.stringify(selectedWords));
+  }
 }
 
 export interface IUser {

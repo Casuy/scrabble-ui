@@ -96,8 +96,12 @@ section.board {
 }
 
 .vote-block-word {
-  font-weight: bold;
+  cursor: pointer;
   font-size: 14px;
+}
+
+.vote-block-word-active {
+  font-weight: bold;
 }
 
 .vote-block-actions {

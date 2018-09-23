@@ -25,7 +25,7 @@ class Selection {
     }
   }
 
-  list() {
+  get list() {
     return Array.from(this.s);
   }
 }
