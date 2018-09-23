@@ -1,0 +1,81 @@
+<section class="container">
+  <section class="board">
+    <div class="board-row" *ngFor="let row of board; let y=index">
+      <div class="board-slot"
+           *ngFor="let slot of row; let x=index"
+           [class.board-slot-focus]="selectedSlot===slot"
+           (mousedown)="focus($event, x, y)">
+        {{slot.letter}}
+      </div>
+    </div>
+  </section>
+
+  <!-- right side -->
+  <aside class="sidebar">
+    <section class="aside-block" style="position: fixed;top: 100vh;left: 100vw;">
+      <input type="text" autofocus (input)="onKeyDown(input)" #input (blur)="$event.preventDefault()">
+    </section>
+    <!-- vote board-->
+    <section class="aside-block aside-center-block vote-block" [style.height.px]="128">
+      <div *ngIf="rs.game.vote.active; then inVoteStage else notInVoteStage"></div>
+      <ng-template #inVoteStage>
+        <div>Choose the correct words:</div>
+        <div>
+          <span *ngIf="rs.game.vote.wordA; let w" (mousedown)="voteSelection.toggle(w)"
+                class="vote-block-word">{{w}}</span>
+          <ng-template *ngIf="rs.game.vote.wordB; let w">
+            <span>, </span>
+            <span (mousedown)="voteSelection.toggle(w)"
+                  class="vote-block-word">{{w}}</span>
+          </ng-template>
+        </div>
+        <div style="display: flex; flex-flow: row nowrap; margin-top: 12px; margin-bottom: -8px">
+          <div style="cursor: pointer;" (click)="vote(selectedWords)">Submit</div>
+        </div>
+      </ng-template>
+      <ng-template #notInVoteStage>
+        <div style="color: #666666;">
+          No vote activity now.
+        </div>
+      </ng-template>
+    </section>
+
+    <!-- scoreboard-->
+    <section class="aside-block">
+      <table class="game-user-list">
+        <thead>
+        <tr>
+          <!--<th></th>-->
+          <th colspan="3" class="game-user-list-heading">
+            Scoreboard
+            <!--<div style="width: 100%; height: 8px; border-bottom: 1px solid #666666;"></div>-->
+          </th>
+        </tr>
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Score</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let u of rs.game.users">
+          <td style="width: 22px;"><span *ngIf="rs.isCurrentUser(u)">→</span></td>
+          <td>{{u.name}}</td>
+          <td>{{u.score}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </aside>
+  <!--<section class="available-tiles">-->
+  <!--<header>Available Tiles</header>-->
+  <!--<div class="tiles">-->
+  <!--<div class="tile" *ngFor="let l of availableLetters">{{l}}</div>-->
+  <!--</div>-->
+  <!--<section class="action-list">-->
+  <!--<button class="action-button" (click)="pass()">Pass</button>-->
+  <!--</section>-->
+  <!--</section>-->
+</section>
+

@@ -1,0 +1,40 @@
+.login-area {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  margin: 48px;
+}
+
+.form-control {
+  width: 255px;
+}
+
+.form-control + .form-control {
+  margin-top: 18px;
+}
+
+.form-control .form-control-name {
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.form-control input {
+  display: block;
+  height: 32px;
+  line-height: 28px;
+  padding: 0 10px;
+  font-size: 12px;
+  width: 100%;
+  border: 2px solid #cccccc;
+  transition: all 200ms;
+}
+
+.form-control input:focus {
+  border: 2px solid #5297cc;
+}
+
+.form-control button {
+  width: 100%;
+  height: 28px;
+}
+

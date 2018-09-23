@@ -1,0 +1,46 @@
+<div class="container">
+  <section class="lobby">
+
+    <!-- lobby -->
+    <section class="lobby-home">
+      <div class="create-room"
+           (click)="createRoom()">
+        Create a Room
+      </div>
+    </section>
+
+    <!-- room -->
+    <section class="lobby-room" *ngIf="rs.inRoom">
+      <header>Room: {{rs.room.id}}</header>
+      <section class="lobby-room-main">
+        <section class="lobby-room-users">
+          <div class="lobby-room-user"
+               *ngFor="let u of rs.room.users">{{u}}
+          </div>
+        </section>
+      </section>
+      <section class="lobby-room-actions">
+        <button class="lobby-room-action lobby-room-action-x" (click)="leaveRoom()">X</button>
+        <button class="lobby-room-action" (click)="startGame()">Start Game</button>
+      </section>
+    </section>
+
+  </section>
+  <!-- aside: user list -->
+  <aside class="user-list-aside" oncontextmenu="return false;">
+    <header class="user-list-aside-header">Online Users</header>
+    <div class="user-list">
+      <div class="user-item" *ngFor="let u of rs.users" (click)="operatingUser=null"
+           [class.user-item-active]="operatingUser==u">
+        <div class="user-item-text" (contextmenu)="operatingUser=u">
+          <span>{{u.name}}</span>
+          <span class="user-item-text-status" *ngIf="u.inRoom&&!u.inGame">Queue</span>
+          <span class="user-item-text-status" *ngIf="u.inGame">Playing</span>
+        </div>
+        <div class="user-item-actions" *ngIf="operatingUser==u">
+          <span class="user-item-action" (click)="invite(u)">Invite</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+</div>
