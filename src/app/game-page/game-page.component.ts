@@ -1,13 +1,7 @@
 import {Component, ElementRef, HostListener, ViewChild} from '@angular/core';
-import {RemoteService} from '../../remote.service';
+import {RemoteService} from '../../remote/remote.service';
+import {BoardSlot} from '../../remote/board';
 
-class BoardSlot {
-  letter: string;
-
-  isFilled() {
-    return !!this.letter;
-  }
-}
 
 class Selection {
   s = new Set<string>();
@@ -41,22 +35,24 @@ export class GamePageComponent {
 
   @ViewChild('input') input: ElementRef;
 
-  board = (new Array(20))
-    .fill(1)
-    .map(() =>
-      (new Array(20))
-        .fill(1)
-        .map(() => new BoardSlot())
-    );
+
   selectedSlot: BoardSlot;
+  lastSelectedSlots: BoardSlot[] = [];
+  lastModifiedSlot: BoardSlot;
   voteSelection = new Selection();
 
   onKeyDown(input) {
     const str = input.value;
     const key = str.charAt(str.length - 1);
     const isLetter = !!key.match(/^[a-z]$/i);
-    if (isLetter && !this.selectedSlot.letter) {
-      this.selectedSlot.letter = key;
+    const slotHasLetter = this.selectedSlot.letter;
+    const currentUserTurn = this.rs.isCurrentUser(this.rs.game.activeUser);
+    const voting = !!this.rs.game.vote && this.rs.game.vote.active;
+    if (isLetter && !slotHasLetter && currentUserTurn && !voting) {
+      this.lastSelectedSlots.forEach(slot => slot.update(null));
+      this.lastSelectedSlots = [];
+      this.selectedSlot.update(key);
+      this.lastModifiedSlot = this.selectedSlot;
     }
     input.value = '';
   }
@@ -67,8 +63,20 @@ export class GamePageComponent {
 
   focus(e, x, y) {
     e.preventDefault();
-    this.selectedSlot = this.board[y][x];
+    if (this.selectedSlot) {
+      this.lastSelectedSlots.push(this.selectedSlot);
+    }
+    this.selectedSlot = this.rs.gameBoard.rows[y][x];
     const input = this.input.nativeElement;
     input.focus();
+  }
+
+  submit() {
+    const pos = this.rs.gameBoard.getPos(this.lastModifiedSlot);
+    this.rs.gameSubmit(pos.y, pos.x, this.lastModifiedSlot.letter);
+  }
+
+  pass() {
+    this.rs.gameSubmit();
   }
 }

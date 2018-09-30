@@ -16,5 +16,24 @@ input {
 }
 
 button {
+  height: 28px;
+  padding: 0 24px;
+  text-align: center;
+  font-size: 12px;
+  border-radius: 4px;
+  border: 1px solid #888888;
+  transition: all 75ms;
   cursor: pointer;
+}
+
+button:hover {
+  background-color: #eeeeee;
+}
+
+button:active {
+  background-color: #dddddd;
+}
+
+button:disabled {
+  pointer-events: none;
 }

@@ -4,17 +4,45 @@
   </header>
 
   <form (ngSubmit)="onSubmit($event, loginForm)" #loginForm="ngForm">
-    <div class="form-control">
-      <div class="form-control-name">Hostname</div>
-      <input type="text" value="localhost" #lh>
+    <!-- address -->
+    <div>
+      <div class="login-form-tabs">
+        <span class="login-form-tab"
+              [class.login-form-tab-active]="showRemoteConfig==false"
+              (mousedown)="showRemoteConfig=false">Local</span>
+        <span class="login-form-tabs-separator"> | </span>
+        <span class="login-form-tab"
+              [class.login-form-tab-active]="showRemoteConfig==true"
+              (mousedown)="showRemoteConfig=true">Remote</span>
+      </div>
+      <!-- local address -->
+      <div [hidden]="showRemoteConfig">
+        <div class="form-control">
+          <div class="form-control-name">Local Hostname</div>
+          <input name="localHost" type="text" #lh [ngModel]="'localhost'">
+        </div>
+        <div class="form-control">
+          <div class="form-control-name">Local Port</div>
+          <input name="localPort" type="text" #lp [ngModel]="9900">
+        </div>
+      </div>
+      <!-- remote address -->
+      <div [hidden]="!showRemoteConfig">
+        <div class="form-control">
+          <div class="form-control-name">Remote Hostname</div>
+          <input name="remoteHost" type="text" #rh [ngModel]="'localhost'">
+        </div>
+        <div class="form-control">
+          <div class="form-control-name">Remote Port</div>
+          <input name="remotePort" type="text" #rp [ngModel]="9999">
+        </div>
+      </div>
     </div>
-    <div class="form-control">
-      <div class="form-control-name">Port</div>
-      <input type="text" #lp value="9999">
-    </div>
+
+    <!-- username -->
     <div class="form-control" style="margin-top: 32px">
       <div class="form-control-name">Username</div>
-      <input type="text" #username [placeholder]="randomName" autofocus>
+      <input name="username" type="text" #username [placeholder]="randomName" autofocus>
     </div>
     <div class="form-control" style="margin-top: 68px">
       <button type="submit">Login</button>

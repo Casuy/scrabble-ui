@@ -1,6 +1,6 @@
-<section class="container">
+<section class="container" *ngIf="rs.gameBoard">
   <section class="board">
-    <div class="board-row" *ngFor="let row of board; let y=index">
+    <div class="board-row" *ngFor="let row of rs.gameBoard.rows; let y=index">
       <div class="board-slot"
            *ngFor="let slot of row; let x=index"
            [class.board-slot-focus]="selectedSlot===slot"
@@ -17,32 +17,40 @@
     </section>
     <!-- vote board-->
     <section class="aside-block aside-center-block vote-block" [style.height.px]="128">
-      <div *ngIf="rs.game.vote.active; then inVoteStage else notInVoteStage"></div>
+      <div *ngIf="rs.game.vote && rs.game.vote.active; then inVoteStage else notInVoteStage"></div>
+      <!-- vote active -->
       <ng-template #inVoteStage>
-        <div>Choose the correct words:</div>
-        <div>
+        <!-- vote for others-->
+        <ng-container *ngIf="rs.game.activeUser != rs.username">
+          <div>Choose the correct words:</div>
+          <div>
           <span *ngIf="rs.game.vote.wordA; let w"
                 (mousedown)="voteSelection.toggle(w)"
                 class="vote-block-word"
                 [class.vote-block-word-active]="voteSelection.isActive(w)">{{w}}</span>
-          <ng-container *ngIf="rs.game.vote.wordB; let w">
-            <span>, </span>
-            <span (mousedown)="voteSelection.toggle(w)"
-                  class="vote-block-word"
-                  [class.vote-block-word-active]="voteSelection.isActive(w)">{{w}}</span>
-          </ng-container>
-        </div>
-        <div style="display: flex; flex-flow: row nowrap; margin-top: 12px; margin-bottom: -8px">
-          <div style="cursor: pointer;" (click)="rs.vote(voteSelection.list)">Submit</div>
+            <ng-container *ngIf="rs.game.vote.wordB&&rs.game.vote.wordB!=rs.game.vote.wordA; let w">
+              <span>, </span>
+              <span (mousedown)="voteSelection.toggle(w)"
+                    class="vote-block-word"
+                    [class.vote-block-word-active]="voteSelection.isActive(w)">{{w}}</span>
+            </ng-container>
+          </div>
+          <div style="display: flex; flex-flow: row nowrap; margin-top: 12px; margin-bottom: -8px">
+            <div style="cursor: pointer;" (click)="rs.gameVote(voteSelection.list)">Submit</div>
+          </div>
+        </ng-container>
+        <!-- vote for current user -->
+        <div style="color: #666666;" *ngIf="rs.game.activeUser == rs.username">
+          Waiting others to vote...
         </div>
       </ng-template>
+      <!-- vote inactive -->
       <ng-template #notInVoteStage>
         <div style="color: #666666;">
           No vote activity now.
         </div>
       </ng-template>
     </section>
-
     <!-- scoreboard-->
     <section class="aside-block">
       <table class="game-user-list">
@@ -62,7 +70,7 @@
         </thead>
         <tbody>
         <tr *ngFor="let u of rs.game.users">
-          <td style="width: 22px;"><span *ngIf="rs.isCurrentUser(u)">→</span></td>
+          <td style="width: 22px;"><span *ngIf="rs.game.activeUser == u.name">→</span></td>
           <td>{{u.name}}</td>
           <td>{{u.score}}</td>
         </tr>
@@ -70,15 +78,11 @@
       </table>
     </section>
 
+    <section>
+      <button (click)="submit()">Submit</button>
+      <button (click)="pass()">Pass</button>
+    </section>
+
   </aside>
-  <!--<section class="available-tiles">-->
-  <!--<header>Available Tiles</header>-->
-  <!--<div class="tiles">-->
-  <!--<div class="tile" *ngFor="let l of availableLetters">{{l}}</div>-->
-  <!--</div>-->
-  <!--<section class="action-list">-->
-  <!--<button class="action-button" (click)="pass()">Pass</button>-->
-  <!--</section>-->
-  <!--</section>-->
 </section>
 

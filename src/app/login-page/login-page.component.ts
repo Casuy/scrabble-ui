@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PageService} from '../../page.service';
-import {RemoteService} from '../../remote.service';
+import {RemoteService} from '../../remote/remote.service';
 import {Form} from '@angular/forms';
 
 @Component({
@@ -11,6 +11,7 @@ import {Form} from '@angular/forms';
 export class LoginPageComponent implements OnInit {
 
   randomName: string;
+  showRemoteConfig = true;
 
   constructor(public ps: PageService, public rs: RemoteService) {
     this.setRandomName();
@@ -28,9 +29,13 @@ export class LoginPageComponent implements OnInit {
 
   onSubmit(e: Event, loginForm) {
     e.preventDefault();
+    const values = loginForm.value;
+    values.username = values.username || this.randomName;
+    console.log(values);
     // if (!username) {
     //   username = this.randomName;
     // }
+    this.rs.connectAndLogin(values);
     this.ps.gotoLobbyPage();
   }
 

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {IUser, RemoteService} from '../../remote.service';
+import {RemoteService} from '../../remote/remote.service';
 import {PageService} from '../../page.service';
+import {IUser} from '../../remote/IUser';
 
 @Component({
   selector: 'app-lobby-page',
@@ -18,19 +19,9 @@ export class LobbyPageComponent implements OnInit {
   ngOnInit() {
   }
 
-  invite(u: IUser) {
-    alert(u.name);
+  invite(name: string) {
+    this.rs.roomInvite(name);
+    this.operatingUser = null;
   }
 
-  createRoom() {
-    this.rs.createRoom();
-  }
-
-  leaveRoom() {
-    this.rs.leaveRoom();
-  }
-
-  startGame() {
-    this.ps.gotoGamePage();
-  }
 }
