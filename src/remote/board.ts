@@ -10,7 +10,12 @@ export class Board {
   update(data: string[][]) {
     data.forEach((row, y) => {
       row.forEach((v, x) => {
-        this.rows[y][x].update(v);
+        const slot = this.rows[y][x];
+        slot.unlock();
+        slot.update(v);
+        if (!!v) {
+          slot.lock();
+        }
       });
     });
   }
@@ -32,12 +37,24 @@ export class Board {
 
 export class BoardSlot {
   letter: string;
+  _lock = false;
 
   isFilled() {
     return !!this.letter;
   }
 
   update(v: string) {
+    if (this._lock) {
+      return;
+    }
     this.letter = v;
+  }
+
+  lock() {
+    this._lock = true;
+  }
+
+  unlock() {
+    this._lock = false;
   }
 }

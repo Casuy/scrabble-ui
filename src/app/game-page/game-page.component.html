@@ -28,11 +28,13 @@
                 (mousedown)="voteSelection.toggle(w)"
                 class="vote-block-word"
                 [class.vote-block-word-active]="voteSelection.isActive(w)">{{w}}</span>
-            <ng-container *ngIf="rs.game.vote.wordB&&rs.game.vote.wordB!=rs.game.vote.wordA; let w">
-              <span>, </span>
-              <span (mousedown)="voteSelection.toggle(w)"
-                    class="vote-block-word"
-                    [class.vote-block-word-active]="voteSelection.isActive(w)">{{w}}</span>
+            <ng-container *ngIf="rs.game.vote.wordB!=rs.game.vote.wordA; ">
+              <ng-container *ngIf="rs.game.vote.wordB; let w">
+                <span>, </span>
+                <span (mousedown)="voteSelection.toggle(w)"
+                      class="vote-block-word"
+                      [class.vote-block-word-active]="voteSelection.isActive(w)">{{w}}</span>
+              </ng-container>
             </ng-container>
           </div>
           <div style="display: flex; flex-flow: row nowrap; margin-top: 12px; margin-bottom: -8px">
