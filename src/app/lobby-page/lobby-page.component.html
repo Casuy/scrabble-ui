@@ -38,8 +38,8 @@
           <div>Join a game?</div>
         </div>
         <div class="aside-inv-actions">
-          <div class="aside-inv-action" (click)="rs.acceptRoomInvitation(inv.roomId)">OK</div>
-          <div class="aside-inv-action" (click)="rs.refuseRoomInvitation(inv.roomId)">X</div>
+          <div class="aside-inv-action" (click)="rs.acceptRoomInvitation(inv.roomId)">Y</div>
+          <div class="aside-inv-action" (click)="rs.refuseRoomInvitation(inv.roomId)">N</div>
         </div>
       </section>
     </header>
@@ -50,7 +50,7 @@
            [class.user-item-active]="operatingUser==u">
         <div class="user-item-text" (mousedown)="operatingUser=operatingUser==u?null:u" (contextmenu)="operatingUser=u">
           <span>{{u.name}}</span>
-          <span class="user-item-text-status" *ngIf="u.inRoom&&!u.inGame">in room</span>
+          <span class="user-item-text-status" *ngIf="u.inRoom&&!u.inGame">In Room</span>
           <span class="user-item-text-status" *ngIf="u.inGame">Playing</span>
         </div>
         <div class="user-item-actions" *ngIf="operatingUser==u&&u.name!=rs.username&&currentUser.inRoom">
