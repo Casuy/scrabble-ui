@@ -38,7 +38,7 @@
             </ng-container>
           </div>
           <div style="display: flex; flex-flow: row nowrap; margin-top: 12px; margin-bottom: -8px">
-            <div style="cursor: pointer;" (click)="rs.gameVote(voteSelection.list)">Submit</div>
+            <div style="cursor: pointer;" (click)="rs.gameVote(voteSelection.list)">Vote</div>
           </div>
         </ng-container>
         <!-- vote for current user -->
@@ -83,6 +83,7 @@
     <section>
       <button (click)="submit()">Submit</button>
       <button (click)="pass()">Pass</button>
+      <button (click)="rs.gameExit()">Exit</button>
     </section>
 
   </aside>

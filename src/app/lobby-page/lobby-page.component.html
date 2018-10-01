@@ -30,7 +30,7 @@
   <!-- aside: user list -->
   <aside class="user-list-aside" oncontextmenu="return false;">
     <header class="user-list-aside-header">
-      <div class="user-list-aside-title">Online Users</div>
+      <div class="user-list-aside-title">{{currentUser.name}}</div>
       <!-- invitation panel -->
       <section class="aside-inv" *ngIf="rs.invitation; let inv">
         <div>
@@ -46,14 +46,14 @@
 
     <!-- user list-->
     <div class="user-list">
-      <div class="user-item" *ngFor="let u of rs.users"
+      <div class="user-item" *ngFor="let u of otherUsers"
            [class.user-item-active]="operatingUser==u">
         <div class="user-item-text" (mousedown)="operatingUser=operatingUser==u?null:u" (contextmenu)="operatingUser=u">
           <span>{{u.name}}</span>
-          <span class="user-item-text-status" *ngIf="u.inRoom&&!u.inGame">Queue</span>
+          <span class="user-item-text-status" *ngIf="u.inRoom&&!u.inGame">in room</span>
           <span class="user-item-text-status" *ngIf="u.inGame">Playing</span>
         </div>
-        <div class="user-item-actions" *ngIf="operatingUser==u&&rs.inRoom&&u.name!=rs.username">
+        <div class="user-item-actions" *ngIf="operatingUser==u&&u.name!=rs.username&&currentUser.inRoom">
           <span class="user-item-action" (click)="invite(u.name)">Invite</span>
         </div>
       </div>

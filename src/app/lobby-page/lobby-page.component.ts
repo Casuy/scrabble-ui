@@ -24,4 +24,12 @@ export class LobbyPageComponent implements OnInit {
     this.operatingUser = null;
   }
 
+  get currentUser() {
+    return this.rs.users.filter(u => u.name === this.rs.username)[0];
+  }
+
+  get otherUsers() {
+    return this.rs.users.filter(u => u.name !== this.rs.username);
+  }
+
 }

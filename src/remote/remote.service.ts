@@ -38,7 +38,7 @@ export class RemoteService {
     if (agent) {
       // @ts-ignore
       this.s = agent.server;
-      agent.hello();
+      // agent.hello();
     } else {
       setTimeout(() => {
         // this.game = {
@@ -53,7 +53,8 @@ export class RemoteService {
           'board': [[null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, 'f', null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null], [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]],
           'activeUser': 'sleepinghedgehog3569',
           'vote': {'active': true, 'wordA': 'f', 'wordB': 'f'},
-          'id': 124278
+          'id': 124278,
+          showResult: false
         };
         this.gameBoard.update(this.game.board);
         this.ps.gotoGamePage();
@@ -82,9 +83,8 @@ export class RemoteService {
     if (this.s) {
       this.username = params.username;
       this.s.bindServer(params.remoteHost, params.remotePort);
-      return this.s.login(params.username, params.localHost, params.localPort);
+      this.s.login(params.username, params.localHost, params.localPort);
     }
-    return true;
   }
 
   createRoom() {
@@ -149,6 +149,12 @@ export class RemoteService {
     this.invitation = null;
     if (this.s) {
       this.s.refuseRoomInvitation(roomId, this.username);
+    }
+  }
+
+  gameExit() {
+    if (this.s) {
+      this.s.gameExit(this.room.id);
     }
   }
 

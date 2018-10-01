@@ -1,5 +1,6 @@
 <ng-container [ngSwitch]="ps.page">
-  <app-game-page *ngSwitchCase="'game'"></app-game-page>
   <app-login-page *ngSwitchCase="'login'"></app-login-page>
   <app-lobby-page *ngSwitchCase="'lobby'"></app-lobby-page>
+  <app-game-page *ngSwitchCase="'game'"></app-game-page>
+  <app-result-page *ngSwitchCase="'result'"></app-result-page>
 </ng-container>

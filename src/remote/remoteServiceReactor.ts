@@ -23,7 +23,11 @@ export class RemoteServiceReactor {
     this.zone.run(() => {
       this.rs.game = JSON.parse(gameJson);
       this.rs.gameBoard.update(this.rs.game.board);
-      this.ps.gotoGamePage();
+      if (this.rs.game.showResult) {
+        this.ps.gotoResultPage();
+      } else {
+        this.ps.gotoGamePage();
+      }
     });
   }
 

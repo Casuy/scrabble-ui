@@ -7,4 +7,5 @@ export interface IGame {
   activeUser: string;
   vote?: IGameVote;
   board: string[][];
+  showResult: boolean;
 }

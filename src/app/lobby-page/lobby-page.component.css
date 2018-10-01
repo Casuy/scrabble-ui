@@ -58,6 +58,8 @@
   font-size: 14px;
   border-bottom: 1px solid #cccccc;
   font-weight: bold;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .user-list {
@@ -84,6 +86,11 @@
 
 .user-item-text-status:before {
   content: ' - ';
+}
+
+.user-item-text {
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .user-item-actions {

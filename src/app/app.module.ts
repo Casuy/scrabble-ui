@@ -8,6 +8,7 @@ import {LobbyPageComponent} from './lobby-page/lobby-page.component';
 import {GamePageComponent} from './game-page/game-page.component';
 import {ContextmenuComponent} from './contextmenu/contextmenu.component';
 import {FormsModule} from '@angular/forms';
+import { ResultPageComponent } from './result-page/result-page.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import {FormsModule} from '@angular/forms';
     LoginPageComponent,
     LobbyPageComponent,
     GamePageComponent,
-    ContextmenuComponent
+    ContextmenuComponent,
+    ResultPageComponent
   ],
   imports: [
     BrowserModule,

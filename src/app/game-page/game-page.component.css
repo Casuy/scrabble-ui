@@ -97,7 +97,8 @@ section.board {
 
 .vote-block-word {
   cursor: pointer;
-  font-size: 14px;
+  font-size: 16px;
+  padding: 4px 4px;
 }
 
 .vote-block-word-active {

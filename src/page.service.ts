@@ -8,7 +8,7 @@ export class PageService {
   page = 'login';
 
   constructor() {
-    // this.page = 'game';
+    // this.page = 'result';
   }
 
   goto(pageName: string) {
@@ -22,6 +22,10 @@ export class PageService {
 
   gotoGamePage() {
     this.goto('game');
+  }
+
+  gotoResultPage() {
+    this.goto('result');
   }
 
   gotoLoginPage() {

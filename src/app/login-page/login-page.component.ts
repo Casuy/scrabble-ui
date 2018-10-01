@@ -21,8 +21,8 @@ export class LoginPageComponent implements OnInit {
   }
 
   setRandomName() {
-    const adj = ['smart', 'stupid', 'honest', 'happy', 'sad', 'sleeping'];
-    const animals = ['fox', 'cat', 'dog', 'sheep', 'rabbit', 'hedgehog'];
+    const adj = ['a', 'b', 'c', 'd', 'e', 'f'];
+    const animals = ['q', 'w', 'e', 'r', 't', 'y'];
     const salt = Date.now() % 10000;
     this.randomName = adj[salt % adj.length] + animals[salt % animals.length] + salt;
   }

@@ -1,0 +1,37 @@
+<div class="container">
+  <article class="result-board" *ngIf="rs.game">
+    <header>
+      <h3 class="result-board-header" hidden>
+        <span *ngIf="isCurrentUserWinner">You Win!</span>
+        <span *ngIf="!isCurrentUserWinner">You Lose!</span>
+      </h3>
+    </header>
+    <section class="detail-table">
+      <table>
+        <tr>
+          <td colspan="2" class="detail-title">
+            <span>winner</span>
+            <span *ngIf="winners.length">s</span>
+          </td>
+        </tr>
+        <tr *ngFor="let u of winners" class="detail-row">
+          <td class="detail-name">{{u.name}}</td>
+          <td>{{u.score}}</td>
+        </tr>
+        <tr>
+          <td colspan="2" class="detail-title">
+            <span>loser</span>
+            <span *ngIf="losers.length">s</span>
+          </td>
+        </tr>
+        <tr *ngFor="let u of losers">
+          <td class="detail-name">{{u.name}}</td>
+          <td>{{u.score}}</td>
+        </tr>
+      </table>
+      <div class="actions">
+        <button (click)="exit()">Exit</button>
+      </div>
+    </section>
+  </article>
+</div>

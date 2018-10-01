@@ -1,0 +1,49 @@
+.container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.result-board {
+  width: 360px;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  margin-top: -7vh;
+}
+
+.result-board-header {
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.detail-title {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 13px;
+  padding: 18px 0 8px 0;
+}
+
+.detail-name {
+  padding-right: 28px;
+  min-width: 230px;
+}
+
+.detail-row {
+  line-height: 24px;
+}
+
+.actions {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  margin-top: 68px;
+}
