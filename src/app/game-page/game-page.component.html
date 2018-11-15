@@ -12,28 +12,36 @@
 
   <!-- right side -->
   <aside class="sidebar">
+    <!-- input hack-->
     <section class="aside-block" style="position: fixed;top: 100vh;left: 100vw;">
       <input type="text" autofocus (input)="onKeyDown(input)" #input (blur)="$event.preventDefault()">
     </section>
+    <!-- username -->
+    <section style="padding: 12px;margin-bottom: 12px">
+      <!--<span>Your name: </span>-->
+      <span style="font-weight: bold">{{rs.username}}</span>
+    </section>
     <!-- vote board-->
-    <section class="aside-block aside-center-block vote-block" [style.height.px]="128">
+    <section class="aside-block aside-center-block vote-block" [style.height.px]="160">
       <div *ngIf="rs.game.vote && rs.game.vote.active; then inVoteStage else notInVoteStage"></div>
       <!-- vote active -->
       <ng-template #inVoteStage>
         <!-- vote for others-->
         <ng-container *ngIf="rs.game.activeUser != rs.username">
-          <div>Choose the correct words:</div>
+          <div style="margin-bottom: 8px;">Choose the correct words:</div>
           <div>
-          <span *ngIf="rs.game.vote.wordA; let w"
-                (mousedown)="voteSelection.toggle(w)"
-                class="vote-block-word"
-                [class.vote-block-word-active]="voteSelection.isActive(w)">{{w}}</span>
+            <div *ngIf="rs.game.vote.wordA; let w"
+                 (mousedown)="voteSelection.toggle(w)"
+                 class="vote-block-word"
+                 [class.vote-block-word-active]="voteSelection.isActive(w)">{{w}}
+            </div>
             <ng-container *ngIf="rs.game.vote.wordB!=rs.game.vote.wordA; ">
               <ng-container *ngIf="rs.game.vote.wordB; let w">
-                <span>, </span>
-                <span (mousedown)="voteSelection.toggle(w)"
-                      class="vote-block-word"
-                      [class.vote-block-word-active]="voteSelection.isActive(w)">{{w}}</span>
+                <!--<div>,</div>-->
+                <div (mousedown)="voteSelection.toggle(w)"
+                     class="vote-block-word"
+                     [class.vote-block-word-active]="voteSelection.isActive(w)">{{w}}
+                </div>
               </ng-container>
             </ng-container>
           </div>
@@ -48,7 +56,10 @@
       </ng-template>
       <!-- vote inactive -->
       <ng-template #notInVoteStage>
-        <div style="color: #666666;">
+        <div *ngIf="currentUserTurn">
+          It's your turn.
+        </div>
+        <div *ngIf="!currentUserTurn" style="color: #666666;">
           No vote activity now.
         </div>
       </ng-template>

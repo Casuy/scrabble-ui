@@ -9,6 +9,7 @@ import {GamePageComponent} from './game-page/game-page.component';
 import {ContextmenuComponent} from './contextmenu/contextmenu.component';
 import {FormsModule} from '@angular/forms';
 import { ResultPageComponent } from './result-page/result-page.component';
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ResultPageComponent } from './result-page/result-page.component';
     LobbyPageComponent,
     GamePageComponent,
     ContextmenuComponent,
-    ResultPageComponent
+    ResultPageComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,

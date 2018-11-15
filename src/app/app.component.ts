@@ -1,5 +1,6 @@
 import {Component, HostListener} from '@angular/core';
 import {PageService} from '../page.service';
+import {RemoteService} from '../remote/remote.service';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,7 @@ import {PageService} from '../page.service';
 })
 export class AppComponent {
 
-  constructor(public ps: PageService) {
+  constructor(public ps: PageService, public rs: RemoteService) {
   }
 
 }

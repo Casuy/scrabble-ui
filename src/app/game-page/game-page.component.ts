@@ -22,6 +22,10 @@ class Selection {
   get list() {
     return Array.from(this.s);
   }
+
+  clear() {
+    this.s.clear();
+  }
 }
 
 @Component({
@@ -41,14 +45,17 @@ export class GamePageComponent {
   lastModifiedSlot: BoardSlot;
   voteSelection = new Selection();
 
+  get currentUserTurn() {
+    return this.rs.isCurrentUser(this.rs.game.activeUser);
+  }
+
   onKeyDown(input) {
     const str = input.value;
     const key = str.charAt(str.length - 1);
     const isLetter = !!key.match(/^[a-z]$/i);
     const slotHasLetter = this.selectedSlot.letter;
-    const currentUserTurn = this.rs.isCurrentUser(this.rs.game.activeUser);
     const voting = !!this.rs.game.vote && this.rs.game.vote.active;
-    if (isLetter && !slotHasLetter && currentUserTurn && !voting) {
+    if (isLetter && !slotHasLetter && this.currentUserTurn && !voting) {
       this.lastSelectedSlots.forEach(slot => slot.update(null));
       this.lastSelectedSlots = [];
       this.selectedSlot.update(key);
@@ -74,6 +81,7 @@ export class GamePageComponent {
   submit() {
     const pos = this.rs.gameBoard.getPos(this.lastModifiedSlot);
     this.rs.gameSubmit(pos.y, pos.x, this.lastModifiedSlot.letter);
+    this.voteSelection.clear();
   }
 
   pass() {

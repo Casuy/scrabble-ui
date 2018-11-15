@@ -35,8 +35,10 @@ export class LoginPageComponent implements OnInit {
     // if (!username) {
     //   username = this.randomName;
     // }
-    this.rs.connectAndLogin(values);
-    this.ps.gotoLobbyPage();
+    const ok = this.rs.connectAndLogin(values);
+    if (ok) {
+      this.ps.gotoLobbyPage();
+    }
   }
 
 }

@@ -21,6 +21,12 @@ export class RemoteService {
   game: IGame;
   gameBoard: Board = new Board();
   reactor: RemoteServiceReactor;
+  loginForm = {
+    usernameError: false,
+    clientAddrError: false,
+    serverError: false
+  };
+  showDisconnectedAlert = false;
 
   get inRoom() {
     return !!this.room;
@@ -78,13 +84,30 @@ export class RemoteService {
     localPort: number
     remoteHost: string
     remotePort: number
-  }) {
+  }): boolean {
     this.bindRemote();
     if (this.s) {
       this.username = params.username;
       this.s.bindServer(params.remoteHost, params.remotePort);
-      this.s.login(params.username, params.localHost, params.localPort);
+      const errorCode = this.s.login(params.username, params.localHost, params.localPort);
+      this.loginForm.clientAddrError = false;
+      this.loginForm.serverError = false;
+      this.loginForm.usernameError = false;
+      switch (errorCode) {
+        case 1:
+          this.loginForm.clientAddrError = true;
+          break;
+        case 2:
+          this.loginForm.serverError = true;
+          break;
+        case 3:
+          this.loginForm.usernameError = true;
+      }
+      if (errorCode === 0) {
+        return true;
+      }
     }
+    return false;
   }
 
   createRoom() {
@@ -108,7 +131,6 @@ export class RemoteService {
 
     }
   }
-
 
   roomInvite(invitee: string) {
     if (this.room) {
@@ -159,4 +181,3 @@ export class RemoteService {
   }
 
 }
-

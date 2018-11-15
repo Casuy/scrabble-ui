@@ -97,12 +97,15 @@ section.board {
 
 .vote-block-word {
   cursor: pointer;
-  font-size: 16px;
-  padding: 4px 4px;
+  font-size: 15px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, .75);
 }
 
 .vote-block-word-active {
-  font-weight: bold;
+  background-color: rgba(0, 0, 0, .75);
+  color: white;
 }
 
 .vote-block-actions {

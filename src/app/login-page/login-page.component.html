@@ -44,7 +44,14 @@
       <div class="form-control-name">Username</div>
       <input name="username" type="text" #username [placeholder]="randomName" autofocus ngModel>
     </div>
-    <div class="form-control" style="margin-top: 68px">
+
+    <div style="font-size: 12px; line-height: 28px; color: #ba4857; height: 56px; margin-top: 8px">
+      <div [hidden]="!rs.loginForm.usernameError">Username already in use.</div>
+      <div [hidden]="!rs.loginForm.clientAddrError">Illegal client address.</div>
+      <div [hidden]="!rs.loginForm.serverError">Connection failed.</div>
+    </div>
+
+    <div class="form-control" style="margin-top: 18px">
       <button type="submit">Login</button>
     </div>
   </form>

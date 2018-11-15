@@ -36,4 +36,10 @@ export class RemoteServiceReactor {
       this.rs.invitation = JSON.parse(invJson);
     });
   }
+
+  alertServerDisconnected() {
+    this.zone.run(() => {
+      this.rs.showDisconnectedAlert = true;
+    });
+  }
 }
